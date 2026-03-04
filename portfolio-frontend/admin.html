@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="admin-container">
+    <header class="admin-header">
+      <h1>Admin Panel</h1>
+      <p>Manage Skills & Projects</p>
+    </header>
+
+    
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="skills">Skills</button>
+      <button class="nav-tab" data-tab="projects">Projects</button>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="tab-content active">
+      <div class="section-header">
+        <h2>Skills</h2>
+        <button class="btn btn-add" id="add-skill-btn">+ Add Skill</button>
+      </div>
+
+      <!-- Add/Edit Skill Form -->
+      <form id="skill-form" class="form-card hidden">
+        <h3 id="skill-form-title">Add New Skill</h3>
+
+        <div class="form-group">
+          <label for="skill-name">Skill Name</label>
+          <input type="text" id="skill-name" required placeholder="e.g., JavaScript" />
+        </div>
+
+        <div class="form-group">
+          <label for="skill-desc">Description</label>
+          <textarea id="skill-desc" rows="3" placeholder="Brief description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="skill-icon">Icon URL</label>
+          <input type="text" id="skill-icon" placeholder="https://example.com/icon.png" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-save">Save</button>
+          <button type="button" class="btn btn-cancel" id="cancel-skill">Cancel</button>
+        </div>
+      </form>
+
+      <!-- Skills List -->
+      <div id="skills-list" class="items-grid"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="tab-content">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <button class="btn btn-add" id="add-project-btn">+ Add Project</button>
+      </div>
+
+      <!-- Add/Edit Project Form -->
+      <form id="project-form" class="form-card hidden" enctype="multipart/form-data">
+        <h3 id="project-form-title">Add New Project</h3>
+
+        <div class="form-group">
+          <label for="project-name">Project Name</label>
+          <input type="text" id="project-name" required placeholder="Project name..." />
+        </div>
+
+        <div class="form-group">
+          <label for="project-tech">Technology</label>
+          <input type="text" id="project-tech" placeholder="e.g., React, Node.js, MongoDB" />
+        </div>
+
+        <div class="form-group">
+          <label for="project-desc">Description</label>
+          <textarea id="project-desc" rows="3" placeholder="Project description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="project-github">GitHub Link</label>
+          <input type="text" id="project-github" placeholder="https://github.com/username/repo" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-save">Save</button>
+          <button type="button" class="btn btn-cancel" id="cancel-project">Cancel</button>
+        </div>
+      </form>
+
+      <!-- Projects List -->
+      <div id="projects-list" class="items-grid"></div>
+    </section>
+  </div>
+
+  <!-- Image Preview Modal -->
+  <div id="image-modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img id="modal-image" src="" alt="Preview" />
+    </div>
+  </div>
+
+  <!--footer-->
+  <footer>
+    <div class="logout-navbar">
+      <a href="index.html">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+
+</html>
