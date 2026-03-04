@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTabs();
   initSkillEvents();
   initProjectEvents();
-  initModal();
-
   loadSkills();
   loadProjects();
 });
@@ -244,7 +242,7 @@ function toggleProjectForm(show, project = null) {
     document.getElementById("project-tech").value = project.technologies || "";
     document.getElementById("project-desc").value = project.description || "";
     document.getElementById("project-github").value = project.githubLink || "";
-    document.getElementById("project-linkedin").value = project.linkedinLink || "";
+    
   } else {
     editingProjectId = null;
     document.getElementById("project-form-title").textContent = "Add New Project";
@@ -259,8 +257,8 @@ async function handleProjectSubmit(e) {
   const technologies = document.getElementById("project-tech").value.trim();
   const description = document.getElementById("project-desc").value.trim();
   const githubLink = document.getElementById("project-github").value.trim();
-  const linkedinLink = document.getElementById("project-linkedin").value.trim();
-  const imageFile = document.getElementById("project-image").files[0]; // make sure id matches your input
+ 
+  
 
   if (!title) return showToast("Project title required");
 
@@ -269,11 +267,7 @@ async function handleProjectSubmit(e) {
   formData.append("technologies", technologies);
   formData.append("description", description);
   formData.append("githubLink", githubLink);
-  formData.append("linkedinLink", linkedinLink);
 
-  if (imageFile) {
-    formData.append("image", imageFile);
-  }
 
   try {
     let response;
@@ -281,12 +275,12 @@ async function handleProjectSubmit(e) {
     if (editingProjectId) {
       response = await fetch(API + "/projects/" + editingProjectId, {
         method: "PUT",
-        body: formData   // ✅ NO HEADERS
+        body: formData  
       });
     } else {
       response = await fetch(API + "/projects", {
         method: "POST",
-        body: formData   // ✅ NO HEADERS
+        body: formData   
       });
     }
 
@@ -320,15 +314,6 @@ function renderProjects() {
   container.innerHTML = projects.map(project => `
     <div class="item-card">
 
-      ${project.imageUrl ? `
-        <img
-          src="http://localhost:8080${project.imageUrl}"
-          class="project-image"
-          onclick="openModal('http://localhost:8080${project.imageUrl}')"
-          onerror="this.style.display='none'"
-        />
-      ` : ""}
-
       <div class="item-title">${project.title}</div>
 
       ${project.technologies ? `
@@ -343,7 +328,7 @@ function renderProjects() {
 
       <div class="item-links">
         ${project.githubLink ? `<a href="${project.githubLink}" target="_blank" class="item-link">GitHub</a>` : ""}
-        ${project.linkedinLink ? `<a href="${project.linkedinLink}" target="_blank" class="item-link">LinkedIn</a>` : ""}
+       
       </div>
 
       <div class="item-actions">
@@ -378,26 +363,3 @@ window.deleteProject = async (id) => {
   }
 };
 
-/* ===============================
-   IMAGE MODAL
-================================ */
-
-function initModal() {
-  const modal = document.getElementById("image-modal");
-  const closeBtn = document.querySelector(".modal-close");
-
-  modal?.addEventListener("click", (e) => {
-    if (e.target.id === "image-modal") closeModal();
-  });
-
-  closeBtn?.addEventListener("click", closeModal);
-}
-
-window.openModal = (src) => {
-  document.getElementById("modal-image").src = src;
-  document.getElementById("image-modal").classList.remove("hidden");
-};
-
-function closeModal() {
-  document.getElementById("image-modal").classList.add("hidden");
-}
