@@ -92,3 +92,14 @@ portfolio-website/
 └── database/
     └── mysql-tables.sql
 ```
+
+---
+## 📸 Application Screenshot
+
+![App Screenshot](assets/Screenshot1.png)
+![App Screenshot](assets/Screenshot2.png)
+![App Screenshot](assets/Screenshot3.png)
+![App Screenshot](assets/Screenshot4.png)
+![App Screenshot](assets/Screenshot5.png)
+![App Screenshot](assets/Screenshot6.png)
+![App Screenshot](assets/Screenshot7.png)
